@@ -2,9 +2,9 @@ name: Rust Pipeline
 
 on:
   push:
-    # branches:
-    #   -main
-      # -beta
+    branches:
+      - main
+      - beta
 
 jobs:
 # Obtention de la version du projet
@@ -14,7 +14,7 @@ jobs:
       release-branches: '^(main)$'
   
 
-  Install-Rust: 
+  Rust-build: 
     name: Rust build
     runs-on: ubuntu-latest
     if: ${{ needs.get-version.outputs.will-release == 'true' }}
@@ -45,9 +45,31 @@ jobs:
 # # Build de wasm
       - name: Build 
         run: trunk build --release
-# # Package
-      - name: Package
-        run: tar -czvf my-project.tar.gz -C dist .
+# # Upload artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wasm-build
+          path: /dist
+        
+  # release:
+  #   name: Release
+  #   runs-on: ubuntu-latest
+  #   needs: [ get-version, Rust-build ]
+  #   steps:
+  #     - name: Download artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: build-artifact
+  #         path: target/
+  #     - name: Create Github Release
+  #       env:
+  #         GH_TOKEN: "${{ github.token }}"
+  #         VERSION: "${{ needs.get-version.outputs.version }}"
+  #         REPO: "${{ github.repository }}"
+  #         COMMIT: "${{ github.sha }}"
+  #       run:
+  #         gh release create --repo $REPO --target $COMMIT $VERSION target/*
 
           
 
