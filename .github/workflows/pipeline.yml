@@ -49,7 +49,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: trunk-build
+          name: build-artifact
           path: /dist
         
   release:
@@ -69,7 +69,7 @@ jobs:
           REPO: "${{ github.repository }}"
           COMMIT: "${{ github.sha }}"
         run:
-          gh release create --repo $REPO --target $COMMIT $VERSION target/*
+          gh release create --repo $REPO --target $COMMIT $VERSION dist/*
 
           
 
