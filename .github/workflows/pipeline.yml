@@ -86,7 +86,7 @@ jobs:
           then
             gh release create --prerelease --repo $REPO --target $COMMIT -F changelog.txt $VERSION rust-app.zip
           else
-            gh release create --repo $REPO --target $COMMIT -F changelog.txt $VERSION rust-app.zip
+            gh release create --repo $REPO --target $COMMIT -F changelog.txt "v$VERSION" rust-app.zip
           fi
 
           
