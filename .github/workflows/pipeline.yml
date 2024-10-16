@@ -36,10 +36,12 @@ jobs:
         # check version de rust
       - name: check rustup version
         run: rustup --version
-        
 # # Install wasm
       - name: Install Wasm
         run: rustup target add wasm32-unknown-unknown
+# # Running trunk
+      - name: Run Trunk
+        run: trunk serve
 # # Build de wasm
       - name: Build 
         run: trunk build --release
