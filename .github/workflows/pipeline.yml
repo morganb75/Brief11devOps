@@ -24,6 +24,16 @@ jobs:
     needs: 
       - get-version
     steps:
+# Print changelog
+      - name: Print version
+        run: |
+          echo "${{ needs.get-version.outputs.version }}"
+          echo "${{ needs.get-version.outputs.changelog }}" >> changelog.md
+          echo "${{ needs.get-version.outputs.is-prerelease }}"
+          echo "${{ needs.get-version.outputs.will-release }}"
+# Test Print changelog
+      - name: View Changelog
+        run: cat cat changelog.md
 # Copie du code source
       - name: Checkout files
         uses: actions/checkout@v4.2.1
