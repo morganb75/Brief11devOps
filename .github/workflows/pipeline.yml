@@ -29,8 +29,11 @@ jobs:
         uses: actions-rs/toolchain@v1.0.6
         with:
           toolchain: stable
+# Install wasm
+      - name: Install Wasm
+        run: rustup target add wasm32-unknown-unknown
 # Build de wasm
-      - name: Build Wasm
+      - name: Build 
         run: trunk build --release
 # Package
       - name: Package
