@@ -33,7 +33,7 @@ jobs:
           echo "${{ needs.get-version.outputs.will-release }}"
 # Test Print changelog
       - name: View Changelog
-        run: cat cat changelog.md
+        run: cat changelog.md
 # Copie du code source
       - name: Checkout files
         uses: actions/checkout@v4.2.1
