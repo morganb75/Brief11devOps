@@ -39,6 +39,9 @@ jobs:
 # # Install wasm
       - name: Install Wasm
         run: rustup target add wasm32-unknown-unknown
+# # Installtrunk
+      - name: Install trunk (trunk-action)
+        run: jetli/trunk-action@v0.5.0
 # # Running trunk
       - name: Run Trunk
         run: trunk serve
