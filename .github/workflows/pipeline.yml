@@ -74,7 +74,7 @@ jobs:
         run: zip -r rust-app.zip dist/*
          # Print changelog
       - name: Print changelog
-        run: echo "${{ needs.get-version.outputs.changelog }}" >> changelog.txt
+        run: echo "${{ needs.get-version.outputs.changelogs }}" >> changelog.txt
       - name: Create Github Release
         env:
           GH_TOKEN: "${{ github.token }}"
