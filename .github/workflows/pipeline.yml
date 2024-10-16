@@ -81,8 +81,13 @@ jobs:
           VERSION: "${{ needs.get-version.outputs.version }}"
           REPO: "${{ github.repository }}"
           COMMIT: "${{ github.sha }}"
-        run:
-          gh release create --repo $REPO --target $COMMIT -F changelog.txt $VERSION rust-app.zip
+        run: |
+          if [ "${{ needs.get-version.outputs.is-prerelease }}" == "true" ] 
+          then
+            gh release create --prerelease --repo $REPO --target $COMMIT -F changelog.txt $VERSION rust-app.zip
+          else
+            gh release create --repo $REPO --target $COMMIT -F changelog.txt $VERSION rust-app.zip
+          fi
 
           
 
