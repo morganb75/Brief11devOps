@@ -6,6 +6,9 @@ on:
       - main
       - beta
 
+permissions:
+  contents: write
+
 jobs:
 # Obtention de la version du projet
   get-version:
