@@ -42,9 +42,6 @@ jobs:
 # # Installtrunk
       - name: Install trunk (trunk-action)
         uses: jetli/trunk-action@v0.5.0
-# # Running trunk
-      - name: Run Trunk
-        run: trunk serve
 # # Build de wasm
       - name: Build 
         run: trunk build --release
