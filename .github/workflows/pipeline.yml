@@ -2,24 +2,24 @@ name: Rust Pipeline
 
 on:
   push:
-    branches:
-      -main
-      -beta
+    # branches:
+    #   -main
+      # -beta
 
 jobs:
 # Obtention de la version du projet
-  get-version:
-    uses: shiipou/github-actions/.github/workflows/get-version.yml@main
-    with:
-      release-branches: '^(main)$'
+  # get-version:
+  #   uses: shiipou/github-actions/.github/workflows/get-version.yml@main
+  #   with:
+  #     release-branches: '^(main)$'
   
 
-  build: 
+  Install-Rust: 
     name: Rust build
     runs-on: ubuntu-latest
-    if: ${{ needs.get-version.outputs.will-release == 'true' }}
-    needs: 
-      - get-version
+    # if: ${{ needs.get-version.outputs.will-release == 'true' }}
+    # needs: 
+    #   - get-version
     steps:
 # Copie du code source
       - name: Checkout files
@@ -29,15 +29,16 @@ jobs:
         uses: actions-rs/toolchain@v1.0.6
         with:
           toolchain: stable
-# Install wasm
-      - name: Install Wasm
-        run: rustup target add wasm32-unknown-unknown
-# Build de wasm
-      - name: Build 
-        run: trunk build --release
-# Package
-      - name: Package
-        run: tar -czvf my-project.tar.gz -C dist .
+          override: true
+# # Install wasm
+#       - name: Install Wasm
+#         run: rustup target add wasm32-unknown-unknown
+# # Build de wasm
+#       - name: Build 
+#         run: trunk build --release
+# # Package
+#       - name: Package
+#         run: tar -czvf my-project.tar.gz -C dist .
 
           
 
