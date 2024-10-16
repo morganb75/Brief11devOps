@@ -8,18 +8,18 @@ on:
 
 jobs:
 # Obtention de la version du projet
-  # get-version:
-  #   uses: shiipou/github-actions/.github/workflows/get-version.yml@main
-  #   with:
-  #     release-branches: '^(main)$'
+  get-version:
+    uses: shiipou/github-actions/.github/workflows/get-version.yml@main
+    with:
+      release-branches: '^(main)$'
   
 
   Install-Rust: 
     name: Rust build
     runs-on: ubuntu-latest
-    # if: ${{ needs.get-version.outputs.will-release == 'true' }}
-    # needs: 
-    #   - get-version
+    if: ${{ needs.get-version.outputs.will-release == 'true' }}
+    needs: 
+      - get-version
     steps:
 # Copie du code source
       - name: Checkout files
@@ -38,14 +38,14 @@ jobs:
         run: rustup --version
         
 # # Install wasm
-#       - name: Install Wasm
-#         run: rustup target add wasm32-unknown-unknown
+      - name: Install Wasm
+        run: rustup target add wasm32-unknown-unknown
 # # Build de wasm
-#       - name: Build 
-#         run: trunk build --release
+      - name: Build 
+        run: trunk build --release
 # # Package
-#       - name: Package
-#         run: tar -czvf my-project.tar.gz -C dist .
+      - name: Package
+        run: tar -czvf my-project.tar.gz -C dist .
 
           
 
