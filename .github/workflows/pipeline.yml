@@ -75,6 +75,8 @@ jobs:
         with:
           name: build-artifact
           path: dist/
+      - name: Zip artifact
+        run: zip -r rust-app.zip dist/*
       - name: Create Github Release
         env:
           GH_TOKEN: "${{ github.token }}"
@@ -82,7 +84,7 @@ jobs:
           REPO: "${{ github.repository }}"
           COMMIT: "${{ github.sha }}"
         run:
-          gh release create --repo $REPO --target $COMMIT $VERSION dist/*
+          gh release create --repo $REPO --target $COMMIT $VERSION rust-app.zip
 
           
 
