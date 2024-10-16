@@ -83,7 +83,7 @@ jobs:
           REPO: "${{ github.repository }}"
           COMMIT: "${{ github.sha }}"
         run:
-          gh release create --repo $REPO --target -f changelog.txt $COMMIT $VERSION rust-app.zip
+          gh release create --repo $REPO --target $COMMIT -F changelog.txt $VERSION rust-app.zip
 
           
 
