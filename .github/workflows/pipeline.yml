@@ -28,7 +28,7 @@ jobs:
       - name: Print version
         run: |
           echo "${{ needs.get-version.outputs.version }}"
-          echo "${{ needs.get-version.outputs.changelog }}" >> changelog.md
+          echo "${{ needs.get-version.outputs.changelog }}" >> changelog.txt
           echo "${{ needs.get-version.outputs.is-prerelease }}"
           echo "${{ needs.get-version.outputs.will-release }}"
 # Test Print changelog
@@ -84,7 +84,7 @@ jobs:
           REPO: "${{ github.repository }}"
           COMMIT: "${{ github.sha }}"
         run:
-          gh release create --repo $REPO --target -f changelog.md $COMMIT $VERSION rust-app.zip
+          gh release create --repo $REPO --target -f changelog.txt $COMMIT $VERSION rust-app.zip
 
           
 
